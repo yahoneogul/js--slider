@@ -33,11 +33,11 @@
   }
 
   function goToPrev() {
-    if (currentIdx > 0) {
+    if (currentIdx > -1) {
       currentIdx--;
       goToSlider();
     }
-    if (currentIdx === 0) {
+    if (currentIdx === -1) {
       setTimeout(function () {
         currentIdx = 5;
         sliderWrapper.style.transform = "translate3D(-600%, 0, 0)";
