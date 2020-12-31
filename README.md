@@ -8,8 +8,10 @@
    element.cloneNode(false) - 요소의 자식 요소는 복제하지 않음
 
 2. 복제한 요소를 slider-wrapper의 앞과 뒤에 붙입니다.
-   2-1 parentElement.appendChild(childElement) - 부모 요소 속 맨 뒤에 넣기
+   2-1 parentElement.append(childElement) - 부모 요소 속 맨 뒤에 넣기
+   2-1 parentElement.prepend(childElement) - 부모 요소 속 맨 앞에 넣기
    2-2 parentElement.insertBefore(childElement, standardElement) 특정 요소(standardElement) 앞에 넣기
+   2-2 parentElement.insertAfter(childElement, standardElement) 특정 요소(standardElement) 뒤에 넣기
 
 3. currentIdx를 통해 transform:translate3D() 값을 조정하여 slider-wrapper를 이동시킵니다.
 
