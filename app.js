@@ -13,9 +13,8 @@
   let clonedFirst = firstChild.cloneNode(true);
   let clonedLast = lastChild.cloneNode(true);
 
-  sliderWrapper.appendChild(clonedFirst);
-  sliderWrapper.insertBefore(clonedLast, sliderWrapper.firstElementChild);
-
+  sliderWrapper.append(clonedFirst);
+  sliderWrapper.prepend(clonedLast);
   //변수 재할당
   sliderItem = slider.querySelectorAll(".slider-item");
   sliderLength = sliderItem.length;
