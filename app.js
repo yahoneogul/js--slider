@@ -6,6 +6,7 @@
 
   let currentIdx = 0;
   let sliderLength = sliderItem.length;
+  let timer;
 
   //slider item clone
   let firstChild = sliderWrapper.firstElementChild;
@@ -23,12 +24,21 @@
   for (let i = 0; i < sliderLength; i++) {
     sliderItem[i].style.left = i * 100 + "%";
   }
-  sliderWrapper.style.transform = "translate3D(-100%, 0, 0)";
 
-  function goToSlider() {
+  function moveToslider(IdxNum) {
     sliderWrapper.style.transform =
       "translate3D(" + -100 * (currentIdx + 1) + "%, 0, 0)";
+    currentIdx = IdxNum;
+  }
+
+  function goToSlider() {
+    moveToslider(currentIdx);
     sliderWrapper.classList.add("animate-slider");
+  }
+
+  function returnToSlider() {
+    moveToslider(currentIdx);
+    sliderWrapper.classList.remove("animate-slider");
   }
 
   function goToPrev() {
@@ -39,12 +49,11 @@
     if (currentIdx === -1) {
       setTimeout(function () {
         currentIdx = 5;
-        sliderWrapper.style.transform = "translate3D(-600%, 0, 0)";
-        sliderWrapper.classList.remove("animate-slider");
+        returnToSlider();
       }, 301);
-      console.log(currentIdx);
     }
   }
+
   function goToNext() {
     if (currentIdx < sliderLength - 2) {
       currentIdx++;
@@ -53,8 +62,7 @@
     if (currentIdx === sliderLength - 2) {
       setTimeout(function () {
         currentIdx = 0;
-        sliderWrapper.style.transform = "translate3D(-100%, 0, 0)";
-        sliderWrapper.classList.remove("animate-slider");
+        returnToSlider();
       }, 301);
     }
   }
@@ -64,12 +72,24 @@
 
     if (targetBtn.classList.contains("btn-prev")) {
       goToPrev();
-      console.log(currentIdx, sliderLength - 2);
+      console.log(currentIdx);
     }
     if (targetBtn.classList.contains("btn-next")) {
       goToNext();
+      console.log(currentIdx);
     }
   }
 
+  function autoSlider() {
+    timer = setInterval(goToNext, 3000);
+  }
+  function stopSlider() {
+    clearInterval(timer);
+  }
+
+  moveToslider(0);
+  autoSlider();
   sliderBtns.addEventListener("click", btnsClickHandler);
+  slider.addEventListener("mouseenter", stopSlider);
+  slider.addEventListener("mouseleave", autoSlider);
 })();
